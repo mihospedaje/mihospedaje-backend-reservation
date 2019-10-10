@@ -1,6 +1,9 @@
 'use strict';
 
 const express = require('express');
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const path = require('path');
 const app = express();
 const cors = require('cors');
 const helmet = require('helmet');
@@ -14,18 +17,20 @@ const corsOptions = {
 }
 
 // Middleware
-app.use(express.json());
 app.use(cors(corsOptions));
 app.use(helmet());
+app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 // Import routes
 const healthcheck = require('./routes/healthcheck');
+const reservation = require('./routes/reservation')(app);
 
 // Implement routes
 app.use('/api/v1', healthcheck);
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
 const server = app.listen(PORT, () => {
     console.log(`Listening on PORT: ${PORT}`);
 });
