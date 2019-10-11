@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  reservations-ms:
+    build: .
+    environment:
+      NODE_ENV: production
+      DATABASE_HOST: reservations-db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: reservations
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3010:3010"
+    depends_on:
+      - reservations-db
+
+  reservations-db:
+    build: ./db
+    environment:
+      MYSQL_DATABASE: reservations
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: 1234
+      DATABASE_HOST: reservations-db
+    ports:
+      - 3308:3308
+    restart: on-failure
