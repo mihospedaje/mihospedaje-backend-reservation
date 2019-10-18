@@ -3,7 +3,7 @@
 const express = require('express');
 const Reservation = require('../controllers/v1/reservation');
 const { wrapper } = require('../middleware/error');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator/check');
 
 module.exports = function (app) {
     app.get('/api/v1/reservation', (req, res) => {
@@ -19,8 +19,8 @@ module.exports = function (app) {
         });
     });
     app.post('/api/v1/reservation',[ 
-        check('guest_adult_number').isNumeric(),
-        check('guest_children_number').isNumeric()],
+        /*check('guest_adult_number').isNumeric(),
+        check('guest_children_number').isNumeric()],*/
          (req, res) => {
         const reservationData = {
             reservation_id: null,
@@ -33,10 +33,7 @@ module.exports = function (app) {
             //created_at: new Date(),
             //updated_at: new Date(),
         };
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
-        }
+        console.log(reservationData);
         Reservation.insertReservation(reservationData, (err, data) => {
             if (data && data.insertId) {
                 res.json({
@@ -53,8 +50,8 @@ module.exports = function (app) {
     });
 
     app.put('/api/v1/reservation/:reservation_id',[ 
-        check('guest_adult_number').isNumeric(),
-        check('guest_children_number').isNumeric()],
+        /*check('guest_adult_number').isNumeric(),
+        check('guest_children_number').isNumeric()],*/
          (req, res) => {
         const reservationData = {
             reservation_id: parseInt(req.params.reservation_id),
