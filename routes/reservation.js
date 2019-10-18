@@ -52,7 +52,7 @@ module.exports = function (app) {
         });
 
 
-    app.put('/api/v1/reservation/:reservation_id', [
+    app.put('/api/v1/reservation/:reservation_id',
         /*check('guest_adult_number').isNumeric(),
         check('guest_children_number').isNumeric()],*/
         (req, res) => {
