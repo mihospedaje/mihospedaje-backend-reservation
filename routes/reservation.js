@@ -16,7 +16,15 @@ module.exports = function (app) {
             reservation_id: parseInt(req.params.reservation_id)
         };
         Reservation.getreservationcode(reservationData, (err, data) => {
-            res.status(200).json(data);
+            res.status(200).json({
+                reservation_id: data[0].reservation_id,
+                user_id: data[0].user_id,
+                start_date: data[0].start_date,
+                end_date: data[0].end_date,
+                guest_adult_number: data[0].guest_adult_number,
+                guest_children_number: data[0].guest_children_number,
+                is_cancel: data[0].is_cancel
+            });
         });
     });
     app.post('/api/v1/reservation', /*[
@@ -30,16 +38,21 @@ module.exports = function (app) {
                 end_date: req.body.end_date,
                 guest_adult_number: req.body.guest_adult_number,
                 guest_children_number: req.body.guest_children_number,
-                is_cancel: req.body.is_cancel,
+                is_cancel: req.body.is_cancel
                 //created_at: new Date(),
                 //updated_at: new Date(),
             };
             console.log(reservationData);
             Reservation.insertReservation(reservationData, (err, data) => {
                 if (data && data.insertId) {
-                    res.json({
-                        success: true,
-                        data: reservationData
+                    res.status(201).json({
+                        reservation_id: data.insertId,
+                        user_id: reservationData.user_id,
+                        start_date: reservationData.start_date,
+                        end_date: reservationData.end_date,
+                        guest_adult_number: reservationData.guest_adult_number,
+                        guest_children_number: reservationData.guest_children_number,
+                        is_cancel: reservationData.is_cancel
                     })
                 } else {
                     res.status(500).json({

@@ -7,7 +7,7 @@ services:
     environment:
       NODE_ENV: production
       DATABASE_HOST: reservations-db
-      MYSQL_PORT: 3306
+      MYSQL_PORT: 3308
       MYSQL_DATABASE: reservations
       MYSQL_USER: mysql
       MYSQL_PASSWORD: 1234
