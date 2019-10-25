@@ -83,9 +83,14 @@ module.exports = function (app) {
 
             Reservation.updateReservation(reservationData, (err, data) => {
                 if (data && data.message) {
-                    res.json({
-                        success: true,
-                        data: reservationData
+                    res.status(201).json({
+                        reservation_id: reservationData.reservation_id,
+                        user_id: reservationData.user_id,
+                        start_date: reservationData.start_date,
+                        end_date: reservationData.end_date,
+                        guest_adult_number: reservationData.guest_adult_number,
+                        guest_children_number: reservationData.guest_children_number,
+                        is_cancel: reservationData.is_cancel
                     })
                 } else {
                     res.status(500).json({
