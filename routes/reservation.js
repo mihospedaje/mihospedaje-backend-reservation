@@ -50,7 +50,7 @@ module.exports = function (app) {
                     res.status(201).json({
                         reservation_id: data.insertId,
                         user_id: reservationData.user_id,
-                        lodging_id: req.body.lodging_id,
+                        lodging_id: reservationData.lodging_id,
                         start_date: reservationData.start_date,
                         end_date: reservationData.end_date,
                         guest_adult_number: reservationData.guest_adult_number,
@@ -74,6 +74,8 @@ module.exports = function (app) {
         (req, res) => {
             const reservationData = {
                 reservation_id: parseInt(req.params.reservation_id),
+                user_id: req.body.user_id,
+                lodging_id: req.body.lodging_id,
                 start_date: req.body.start_date,
                 end_date: req.body.end_date,
                 guest_adult_number: req.body.guest_adult_number,
@@ -89,7 +91,7 @@ module.exports = function (app) {
                     res.status(201).json({
                         reservation_id: reservationData.reservation_id,
                         user_id: reservationData.user_id,
-                        lodging_id: req.body.lodging_id,
+                        lodging_id: reservationData.lodging_id,
                         start_date: reservationData.start_date,
                         end_date: reservationData.end_date,
                         guest_adult_number: reservationData.guest_adult_number,
