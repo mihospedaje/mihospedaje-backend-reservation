@@ -19,6 +19,7 @@ module.exports = function (app) {
             res.status(200).json({
                 reservation_id: data[0].reservation_id,
                 user_id: data[0].user_id,
+                lodging_id: data[0].lodging_id,
                 start_date: data[0].start_date,
                 end_date: data[0].end_date,
                 guest_adult_number: data[0].guest_adult_number,
@@ -34,6 +35,7 @@ module.exports = function (app) {
             const reservationData = {
                 reservation_id: null,
                 user_id: req.body.user_id,
+                lodging_id: req.body.lodging_id,
                 start_date: req.body.start_date,
                 end_date: req.body.end_date,
                 guest_adult_number: req.body.guest_adult_number,
@@ -48,6 +50,7 @@ module.exports = function (app) {
                     res.status(201).json({
                         reservation_id: data.insertId,
                         user_id: reservationData.user_id,
+                        lodging_id: req.body.lodging_id,
                         start_date: reservationData.start_date,
                         end_date: reservationData.end_date,
                         guest_adult_number: reservationData.guest_adult_number,
@@ -86,6 +89,7 @@ module.exports = function (app) {
                     res.status(201).json({
                         reservation_id: reservationData.reservation_id,
                         user_id: reservationData.user_id,
+                        lodging_id: req.body.lodging_id,
                         start_date: reservationData.start_date,
                         end_date: reservationData.end_date,
                         guest_adult_number: reservationData.guest_adult_number,

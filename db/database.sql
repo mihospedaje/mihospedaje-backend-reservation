@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS reservation(
 
 reservation_id int(10) NOT NULL auto_increment primary key,
 user_id int(10) NOT NULL,
+lodging_id int(10) NOT NULL,
 start_date date not null,
 end_date date not null,
 guest_adult_number int(4) not null,
