@@ -11,6 +11,16 @@ module.exports = function (app) {
             res.status(200).json(data);
         });
     });
+    app.get('/api/v1/reservation/user/:userid', (req, res) => {
+        console.log("params: ", req.params.userid);
+            Reservation.getreservationByUser(req.params.userid, (err, data) => {
+                if (err){
+                    throw err
+                }else{
+                    res.status(200).json(data);
+                }
+            })
+    });
     app.get('/api/v1/reservation/:reservation_id', (req, res) => {
         const reservationData = {
             reservation_id: parseInt(req.params.reservation_id)

@@ -7,10 +7,10 @@ connection = mysql.createConnection({
     user            : process.env.MYSQL_USER,
     password        : process.env.MYSQL_PASSWORD,
     database        : process.env.MYSQL_DATABASE
-    /**host: 'localhost',
+    /*host: 'localhost',
     user: 'root',
-    password: 'Estiven0402+',
-    database: 'reservations'**/
+    password: 'root',
+    database: 'reservations'*/
 });
 
 let ReservationModel = {};
@@ -18,6 +18,20 @@ ReservationModel.getreservation = (callback) => {
     if (connection) {
         connection.query(
             'SELECT * FROM reservation ORDER BY reservation_id',
+            (err, rows) => {
+                if (err) {
+                    throw err
+                } else {
+                    callback(null, rows)
+                }
+            }
+        )
+    }
+}
+ReservationModel.getreservationByUser = (userid,callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM reservation where user_id = ?',userid,
             (err, rows) => {
                 if (err) {
                     throw err
